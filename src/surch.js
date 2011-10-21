@@ -19,7 +19,11 @@ var Surch = Fidel.ViewController.extend({
     this.input.bind('blur', this.proxy(this.hideResults));
   },
   handleInput: function handleInput(event) {
-    if(this.lastValue === this.input.val() || this.input.val().length < this.minLength) return;
+    if(this.lastValue === this.input.val()) return;
+    if(this.input.val().length < this.minLength) {
+      this.hideResults();
+      return;
+    }
     this.lastValue = this.input.val();
 
     if(typeof this.counter !== null) clearTimeout(this.counter);
@@ -44,8 +48,9 @@ var Surch = Fidel.ViewController.extend({
     this.results.html(this.template(this.templates.results, results));
   },
   hideResults: function hideResults() {
-    var self= this;
-    setTimeout(function() {
+    if(typeof this.hideTimeout !== null) clearTimeout(this.hideTimeout);
+    var self = this;
+    this.hideTimeout = setTimeout(function() {
       self.lastValue = '';
       self.results.html('');
     }, this.blurTimeout);
