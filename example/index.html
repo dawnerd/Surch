@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Surch Demo</title>
+  <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+  <script src="../vendor/fidel/dist/fidel.min.js"></script>
+  <script src="../src/surch.js"></script>
+</head>
+<body>
+
+  <form id="ExampleSearch">
+    <input type="text" value="" data-autocomplete="true" />
+    <div id="Results"></div>
+  </form>
+
+
+
+  <script>
+  var options = {
+    internalFilter: true,
+    searchService: 'example_data.json',
+  };
+
+  var crazySurcher = new Surch({el: $('#ExampleSearch'), config: options});
+  </script>
+
+</body>
+</html>
