@@ -2,6 +2,16 @@
 <html>
 <head>
   <title>Surch Demo</title>
+  <style>
+    .searchInput { display: block; float: left; width: 50%; padding: 5px; border: 1px solid #ccc; border-radius: 10px; border-top-right-radius: 0; border-bottom-right-radius: 0; outline: none; font-size: 18px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); color: #808080; }
+    .searchButton { display: block; float: left; border: 1px solid rgba(0, 0, 0, 0.1); border-left: 0; background: #0064CD; font-size: 18px; color: #fff; padding: 5px; margin-left: 0; background-image: -webkit-linear-gradient(top, #049CDB, #0064CD); border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+
+    #SurchResults { clear: left; width: 50%; }
+      #SurchResults ul { list-style: none; margin: 0; padding: 0; }
+        #SurchResults li { padding: 5px 10px; }
+          #SurchResults li:hover { background: whiteSmoke; }
+          #SurchResults li a { display: block; width: 100%; font-size: 18px; color: #0069D6; text-decoration: none; }
+  </style>
   <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
   <script src="../vendor/fidel/dist/fidel.min.js"></script>
   <script src="../src/surch.js"></script>
@@ -9,8 +19,16 @@
 <body>
 
   <form id="ExampleSearch">
-    <input type="text" value="" data-autocomplete="true" />
-    <div id="Results"></div>
+    <input class="searchInput" type="text" value="" data-autocomplete="true">
+    <input class="searchButton" type="submit" value="Search">
+    <div id="SurchResults"></div>
+    <script type="text/html" id="SurchResultsTpl">
+      <ul>
+        {! for(var i = 0, c = items.length; i < c; i++){ !}
+        <li><a href="index.html?s={!= encodeURIComponent(items[i]) !}">{!= items[i] !}</a></li>
+        {! } !}
+      </ul>
+    </script>
   </form>
 
 
